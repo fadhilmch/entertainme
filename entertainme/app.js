@@ -6,10 +6,13 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var redis = require('redis');
 var client = redis.createClient();
+var { graphiqlExpress, graphqlExpress } = require('apollo-server-express');
 
 var index = require('./routes/index');
 var movies = require('./routes/movies');
 var tvshows = require('./routes/tvshows');
+// var schema = require('./graphql/entertainme.schema');
+var schema = require('./graphql/schema');
 
 var app = express();
 
@@ -28,6 +31,8 @@ app.use(express.static(path.join(__dirname, 'public')));
 app.use('/', index);
 app.use('/movies', movies);
 app.use('/tvshows', tvshows);
+app.use('/graphql', bodyParser.json(), graphqlExpress({ schema }))
+app.use('/graphiql', graphiqlExpress({ endpointURL: '/graphql'}))
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
