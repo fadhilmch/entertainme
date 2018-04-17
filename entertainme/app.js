@@ -7,6 +7,7 @@ var bodyParser = require('body-parser');
 var redis = require('redis');
 var client = redis.createClient();
 var { graphiqlExpress, graphqlExpress } = require('apollo-server-express');
+var cors = require('cors')
 
 var index = require('./routes/index');
 var movies = require('./routes/movies');
@@ -22,6 +23,7 @@ app.set('view engine', 'jade');
 
 // uncomment after placing your favicon in /public
 //app.use(favicon(path.join(__dirname, 'public', 'favicon.ico')));
+app.use(cors());
 app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));

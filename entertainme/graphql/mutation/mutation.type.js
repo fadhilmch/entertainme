@@ -7,21 +7,17 @@ const Mutation = `
     tag: [String]
   }
 
+  input TvshowInput {
+    title: String!,
+    overview: String!,
+    poster_path: String,
+    popularity: Float,
+    tag: [String] 
+  }
+
   type Mutation {
-    addMovie ( 
-      title: String,
-      overview: String,
-      poster_path: String,
-      popularity: Float,
-      tag: [String]
-    ) : Movie,
-    addTvshow (
-      title: String!,
-      overview: String!,
-      poster_path: String,
-      popularity: Float,
-      tag: [String]
-    ) : Tvshow
+    addMovie ( movie: MovieInput ) : Movie,
+    addTvshow ( tvshow: TvshowInput ) : Tvshow
   }
 ` 
 

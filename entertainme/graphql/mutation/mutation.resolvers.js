@@ -1,18 +1,12 @@
 const axios = require('axios')
 
 const MutationResolvers = {
-  addMovie: async (_, {title, overview, poster_path, popularity, tag }) => {
-    // console.log('masuk')
+  addMovie: async (_, {movie}) => {
+    console.log('masuk',movie)
     return await axios({
       method: 'post',
       url: `http://localhost:3001/movies`,
-      data: {
-        title,
-        overview,
-        poster_path,
-        popularity,
-        tag
-      }
+      data: movie
     })
   }, 
   addTvshow: async (_, {title, overview, poster_path, popularity, tag }) => {
